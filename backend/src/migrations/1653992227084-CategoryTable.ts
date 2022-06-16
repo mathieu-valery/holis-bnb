@@ -3,16 +3,16 @@ import { MigrationInterface, QueryRunner } from 'typeorm';
 export class CategoryTable1653992227084 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     queryRunner.query(
-      `INSERT INTO Category (id, property_type, description) VALUES (1, 'hotel', 'Un hotel est un lieu génial');`,
+      `INSERT INTO Category (id, name, description) VALUES (1, 'hotel', 'Un hotel est un lieu génial');`,
     );
     queryRunner.query(
-      `INSERT INTO Category (id, property_type, description) VALUES (2, 'appartement', 'Vous vous sentirez comme chez vous');`,
+      `INSERT INTO Category (id, name, description) VALUES (2, 'appartement', 'Vous vous sentirez comme chez vous');`,
     );
     queryRunner.query(
-      `INSERT INTO Category (id, property_type, description) VALUES (3, 'guesthouse', 'Rencontrez des habitants');`,
+      `INSERT INTO Category (id, name, description) VALUES (3, 'guesthouse', 'Rencontrez des habitants');`,
     );
     queryRunner.query(
-      `INSERT INTO Category (id, property_type, description) VALUES (4, 'villa', 'Si vous cherchez plus grand, vous ne trouverez pas');`,
+      `INSERT INTO Category (id, name, description) VALUES (4, 'villa', 'Si vous cherchez plus grand, vous ne trouverez pas');`,
     );
   }
 
