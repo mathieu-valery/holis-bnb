@@ -8,7 +8,7 @@ const SearchPage: React.FC<SearchPageProps> = () => {
 
   // Create a function to sort locations by categories & by number of rooms
 
-  // Bonus: Create a search function linked to the search input in the header
+  // Create a search function linked to the search input in the header
 
   return <div className="search">{/* List of sorted locations card */}</div>;
 };
