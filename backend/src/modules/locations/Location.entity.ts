@@ -40,7 +40,9 @@ export class Location {
   @Column({ type: 'integer', name: 'category_id' })
   categoryId: number;
 
-  @ManyToOne(() => Category, (cat) => cat.locations)
+  @ManyToOne(() => Category, (cat) => cat.locations, {
+    eager: true,
+  })
   @JoinColumn({ name: 'category_id', referencedColumnName: 'id' })
   category: Category;
 }
