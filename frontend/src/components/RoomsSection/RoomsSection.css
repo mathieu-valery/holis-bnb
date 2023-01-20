@@ -1,0 +1,13 @@
+.title {
+    padding-right: 30px;
+}
+
+.rooms-section {
+    display: flex;
+    
+}
+
+.cards-section {
+    display: flex;
+    flex-direction: row;
+}
