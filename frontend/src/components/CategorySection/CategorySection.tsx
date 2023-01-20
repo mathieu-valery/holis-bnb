@@ -10,7 +10,7 @@ type CategorySectionProps = {
 const CategorySection: React.FC<CategorySectionProps> = (props) => {
   return (
     <>
-      <h1 className="section-title">{props.title}</h1>
+      <h1 className="category-title">{props.title}</h1>
       {props.children}
     </>
   );
