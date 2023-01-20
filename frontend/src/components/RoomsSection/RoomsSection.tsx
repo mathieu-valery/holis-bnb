@@ -10,7 +10,7 @@ type RoomsSectionProps = {
 const RoomsSection: React.FC<RoomsSectionProps> = (props) => {
   return (
     <div className="rooms-section">
-      <h2 className="title">{props.title}</h2>
+      <h2 className="rooms-title">{props.title}</h2>
       <div className="cards-section">{props.children}</div>
     </div>
   );
