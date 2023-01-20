@@ -1,5 +1,6 @@
-import { Type } from 'class-transformer';
-import { IsDate, IsNumber, IsString } from 'class-validator';
+// import { Type } from 'class-transformer';
+// import { IsDate, IsNumber, IsString } from 'class-validator';
+import { IsOptional } from 'class-validator';
 
 /**
  * This dto is used to control user inputs and make sure it is valid data to create locations.
@@ -11,14 +12,19 @@ import { IsDate, IsNumber, IsString } from 'class-validator';
 /**
  * TODO implement
  */
-export class ExampleLocationDto {
-  @IsString()
-  xxx: string;
+// export class ExampleLocationDto {
+//   @IsString()
+//   xxx: string;
 
-  @IsDate()
-  @Type(() => Date)
-  yyyy: Date;
+//   @IsDate()
+//   @Type(() => Date)
+//   yyyy: Date;
 
-  @IsNumber()
-  zzzz: number;
+//   @IsNumber()
+//   zzzz: number;
+// }
+
+export class GetFilterLocationDto {
+  @IsOptional()
+  title: string;
 }
