@@ -1,8 +1,108 @@
-.display-location {
+.display-location > img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
 }
 
-.display-location__content {
+.display-location .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.display-location__edit {
+.display-location__content .title {
+    font-size: 35px;
+    color: rgba(0, 0, 0, 0.55);
+}
+
+.display-location__content .category-name {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.55);
+}
+
+.display-location__content .category-description {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.55);
+}
+
+.price {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.55);
+}
+
+.price-strong {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.9);
+}
+
+.display-location__edit .container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+    padding: 16px;
+    margin-top: 20px;
+}
+
+.display-location__edit .container > p {
+    align-self: flex-start;
+    padding-left: 12px;
+    font-size: 14px;
+    color:rgba(0, 0, 0, 0.55);
+}
+
+
+.display-location__edit .container > input {
+    border: none;
+    padding: 10px;
+    width: 250px;
+    outline-width: 0;
+    font-size: 14px;
+    padding: 10px;
+    height: 30px;
+    border: 1px solid lightgray;
+    border-radius: 999px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+}
+
+.buttons-container {
+    display: flex;
+    padding: 10px;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.delete-button {
+    border: none;
+    padding: 10px;
+    width: 100px;
+    outline-width: 0;
+    font-size: 14px;
+    height: 36px;
+    border: 1px solid #04ddbf;
+    background-color: white;
+    color: #04ddbf;
+    border-radius: 999px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    line-height: 0px;
+    cursor: pointer;
+}
+
+.confirm-button {
+    border: none;
+    padding: 10px;
+    width: 100px;
+    outline-width: 0;
+    font-size: 14px;
+    height: 36px;
+    border: 1px solid #04ddbf;
+    background-color: #04ddbf;
+    color: white;
+    border-radius: 999px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    line-height: 0px;
+    cursor: pointer;
 }

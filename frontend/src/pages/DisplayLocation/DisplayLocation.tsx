@@ -2,16 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { fetchLocation } from '../../helpers/ajax';
 import { Location } from '../../helpers/interfaces';
+import './DisplayLocation.css';
+
 type DisplayLocationPageProps = {};
 
 const DisplayLocationPage: React.FC<DisplayLocationPageProps> = () => {
-  // Create a function to handle price change and persist it to database
-  // Create a function to delete the location and persist it to database
-  // Confusing because the state is named 'location
   const CurrentLocationObject = useLocation();
   const regex = /\d/g;
   let id: string;
-  console.log(CurrentLocationObject.pathname.match(regex));
+
   const matched: RegExpMatchArray | null = CurrentLocationObject.pathname.match(regex);
   if (matched) {
     id = matched[0];
@@ -29,18 +28,26 @@ const DisplayLocationPage: React.FC<DisplayLocationPageProps> = () => {
     <div className="display-location">
       {location && (
         <>
-          <h1>{location.title}</h1>
-          {/* image */}
-          <div className="display-location__content">
-            {/* title */}
-            {/* property type */}
-            {/* category description */}
-            {/* price */}
-          </div>
-          <div className="display-location__edit">
-            {/* price input */}
-            {/* price button */}
-            {/* delete button */}
+          <img src={location.picture} />
+          <div className="container">
+            <div className="display-location__content">
+              <p className="title">{location.title}</p>
+              <p className="category-name">{location.category.name}</p>
+              <p className="category-description">{location.category.description}</p>
+            </div>
+            <p className="price">
+              <strong>{`€${location.price}`}</strong> night
+            </p>
+            <div className="display-location__edit">
+              <div className="container">
+                <p>Modifiy price</p>
+                <input placeholder="enter new price"></input>
+                <div className="buttons-container">
+                  <button className="delete-button">Delete</button>
+                  <button className="confirm-button">Confirm</button>
+                </div>
+              </div>
+            </div>
           </div>
         </>
       )}
