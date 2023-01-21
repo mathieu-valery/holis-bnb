@@ -1,25 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { fetchLocation } from '../../helpers/ajax';
+import { Location } from '../../helpers/interfaces';
 type DisplayLocationPageProps = {};
-
-interface Category {
-  id: number;
-  name: string;
-  description: string;
-}
-interface Location {
-  id: number;
-  title: string;
-  description: string;
-  location: string;
-  picture: string;
-  stars: number;
-  numberOfRooms: number;
-  price: number;
-  categoryId: number;
-  category: Category;
-}
 
 const DisplayLocationPage: React.FC<DisplayLocationPageProps> = () => {
   // Create a function to handle price change and persist it to database

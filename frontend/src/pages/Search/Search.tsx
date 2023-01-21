@@ -1,31 +1,12 @@
 import React, { useEffect, useContext } from 'react';
 import './Search.css';
-// import axios from 'axios';
+import { Location } from '../../helpers/interfaces';
 import CategorySection from '../../components/CategorySection/CategorySection';
 import RoomsSection from '../../components/RoomsSection/RoomsSection';
 import Card from '../../components/Card/Card';
 import LocationsContext from '../../components/Context/LocationsContext';
 
 type SearchPageProps = {};
-// const url = 'localhost:8000';
-
-interface Category {
-  id: number;
-  name: string;
-  description: string;
-}
-interface Location {
-  id: number;
-  title: string;
-  description: string;
-  location: string;
-  picture: string;
-  stars: number;
-  numberOfRooms: number;
-  price: number;
-  categoryId: number;
-  category: Category;
-}
 
 const SearchPage: React.FC<SearchPageProps> = () => {
   let locationsByCategory: any = {};
@@ -49,8 +30,6 @@ const SearchPage: React.FC<SearchPageProps> = () => {
       locationsByCategory[key] = groupBy(value, 'numberOfRooms');
     });
   }
-
-  // Create a search function linked to the search input in the header
 
   return (
     <div className="search">
