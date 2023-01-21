@@ -14,9 +14,13 @@ export class LocationService {
     return await this.locationRepository.find();
   }
 
-  async getLocationsByName(title) {
+  async getLocationsByName(title: string) {
     return await this.locationRepository.find({
       title: ILike(`%${title}%`),
     });
+  }
+
+  async getLocation(id: string) {
+    return await this.locationRepository.findOne(id);
   }
 }

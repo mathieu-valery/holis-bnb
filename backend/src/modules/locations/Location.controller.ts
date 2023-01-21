@@ -15,4 +15,8 @@ export class LocationController {
     }
     return await this.locationService.getLocations();
   }
+  @Get(':id')
+  async getLocation(@Param('id') id: string) {
+    return await this.locationService.getLocation(id);
+  }
 }
