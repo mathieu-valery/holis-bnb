@@ -1,11 +1,9 @@
 import React, { createContext, useState } from 'react';
-import axios from 'axios';
+import { fetchLocations, fetchLocationsByName } from '../../helpers/ajax';
 
 const LocationsContext = createContext({});
 const { Provider } = LocationsContext;
 const LocationsConsumer = LocationsContext.Consumer;
-const url = 'localhost:8000';
-
 interface Category {
   id: number;
   name: string;
@@ -27,16 +25,6 @@ interface Location {
 let LocationsProvider = (props: any) => {
   // TODO : find to right type to provide to children
   const [locations, setLocations] = useState<Array<Location> | null>(null);
-
-  async function fetchLocations() {
-    const { data } = await axios.get(`http://${url}/locations`);
-    return data;
-  }
-
-  async function fetchLocationsByName(title: string) {
-    const { data } = await axios.get(`http://${url}/locations?title=${title}`);
-    return data;
-  }
 
   const getLocations = () => {
     fetchLocations().then((res) => {
