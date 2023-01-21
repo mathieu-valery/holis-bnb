@@ -33,15 +33,27 @@ let LocationsProvider = (props: any) => {
     return data;
   }
 
+  async function fetchLocationsByName(title: string) {
+    const { data } = await axios.get(`http://${url}/locations?title=${title}`);
+    return data;
+  }
+
   const getLocations = () => {
     fetchLocations().then((res) => {
       setLocations(res);
     });
   };
 
+  const getLocationsByName = (title: string) => {
+    fetchLocationsByName(title).then((res) => {
+      setLocations(res);
+    });
+  };
+
   const store = {
     locations,
-    getLocations
+    getLocations,
+    getLocationsByName
   };
 
   return <Provider value={store}>{props.children}</Provider>;
