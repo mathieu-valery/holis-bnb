@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Like } from 'typeorm';
+import { Repository, ILike } from 'typeorm';
 import { Location } from './Location.entity';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class LocationService {
 
   async getLocationsByName(title) {
     return await this.locationRepository.find({
-      title: Like(`%${title}%`),
+      title: ILike(`%${title}%`),
     });
   }
 }
