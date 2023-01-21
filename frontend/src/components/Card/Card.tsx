@@ -1,23 +1,6 @@
 import React from 'react';
 import './Card.css';
-
-interface Category {
-  id: number;
-  name: string;
-  description: string;
-}
-interface Location {
-  id: number;
-  title: string;
-  description: string;
-  location: string;
-  picture: string;
-  stars: number;
-  numberOfRooms: number;
-  price: number;
-  categoryId: number;
-  category: Category;
-}
+import { Location } from '../../helpers/interfaces';
 
 interface CardProps {
   location: Location;
