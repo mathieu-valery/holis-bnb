@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import './Search.css';
-import axios from 'axios';
+// import axios from 'axios';
 import CategorySection from '../../components/CategorySection/CategorySection';
 import RoomsSection from '../../components/RoomsSection/RoomsSection';
 import Card from '../../components/Card/Card';
+import LocationsContext from '../../components/Context/LocationsContext';
 
 type SearchPageProps = {};
-const url = 'localhost:8000';
+// const url = 'localhost:8000';
 
 interface Category {
   id: number;
@@ -27,18 +28,12 @@ interface Location {
 }
 
 const SearchPage: React.FC<SearchPageProps> = () => {
-  const [locations, setLocations] = useState<Array<Location> | null>(null);
   let locationsByCategory: any = {};
-
-  async function fetchLocations() {
-    const { data } = await axios.get(`http://${url}/locations`);
-    return data;
-  }
+  const locationsContext: any = useContext(LocationsContext);
+  const locations = locationsContext.locations;
 
   useEffect(() => {
-    fetchLocations().then((res) => {
-      setLocations(res);
-    });
+    locationsContext.getLocations();
   }, []);
 
   const groupBy = (array: Array<Location>, key: keyof Location): object => {
