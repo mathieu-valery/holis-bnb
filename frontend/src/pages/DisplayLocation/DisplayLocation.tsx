@@ -28,17 +28,21 @@ const DisplayLocationPage: React.FC<DisplayLocationPageProps> = () => {
 
   const handleClickConfirm = () => {
     if (window.confirm('UPDATE PRICE: Do you really want to update the price of this location ?')) {
-      updateLocationPrice(id, refInput.current.value).then((res) => {
-        setLocation(res);
-      });
+      updateLocationPrice(id, refInput.current.value)
+        .then((res) => {
+          setLocation(res);
+        })
+        .catch((err) => window.alert(`ERROR: ${err.message}`));
     }
   };
 
   const handleClickDelete = () => {
     if (window.confirm('DELETE LOCATION: Are you sure ? This action is irreversible')) {
-      deleteLocation(id).then(() => {
-        navigate('/');
-      });
+      deleteLocation(id)
+        .then(() => {
+          navigate('/');
+        })
+        .catch((err) => window.alert(`ERROR: ${err.message}`));
     }
   };
 
