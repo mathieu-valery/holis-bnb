@@ -1,14 +1,20 @@
 import React from 'react';
 import './Card.css';
 import { Location } from '../../helpers/interfaces';
+import { useNavigate } from 'react-router-dom';
 
 interface CardProps {
   location: Location;
 }
 
-const Card: React.FC<CardProps> = (props) => {
+const Card: React.FC<CardProps> = (props: CardProps) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/locations/${props.location.id}`);
+  };
+
   return (
-    <div className="card">
+    <div className="card" onClick={handleClick}>
       <img src={props.location.picture} />
       <p className="card-title">
         <strong>{props.location.title}</strong>

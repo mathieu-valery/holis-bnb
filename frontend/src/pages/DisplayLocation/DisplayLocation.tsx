@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { fetchLocation } from '../../helpers/ajax';
+import React, { useEffect, useState, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { fetchLocation, updateLocationPrice, deleteLocation } from '../../helpers/ajax';
 import { Location } from '../../helpers/interfaces';
 import './DisplayLocation.css';
 
@@ -8,8 +8,10 @@ type DisplayLocationPageProps = {};
 
 const DisplayLocationPage: React.FC<DisplayLocationPageProps> = () => {
   const CurrentLocationObject = useLocation();
-  const regex = /\d/g;
+  const regex = /\d+/g;
   let id: string;
+  let refInput = useRef(document.createElement('input'));
+  const navigate = useNavigate();
 
   const matched: RegExpMatchArray | null = CurrentLocationObject.pathname.match(regex);
   if (matched) {
@@ -23,6 +25,22 @@ const DisplayLocationPage: React.FC<DisplayLocationPageProps> = () => {
       setLocation(res);
     });
   }, []);
+
+  const handleClickConfirm = () => {
+    if (window.confirm('UPDATE PRICE: Do you really want to update the price of this location ?')) {
+      updateLocationPrice(id, refInput.current.value).then((res) => {
+        setLocation(res);
+      });
+    }
+  };
+
+  const handleClickDelete = () => {
+    if (window.confirm('DELETE LOCATION: Are you sure ? This action is irreversible')) {
+      deleteLocation(id).then(() => {
+        navigate('/');
+      });
+    }
+  };
 
   return (
     <div className="display-location">
@@ -41,10 +59,14 @@ const DisplayLocationPage: React.FC<DisplayLocationPageProps> = () => {
             <div className="display-location__edit">
               <div className="container">
                 <p>Modifiy price</p>
-                <input placeholder="enter new price"></input>
+                <input placeholder="enter new price" ref={refInput}></input>
                 <div className="buttons-container">
-                  <button className="delete-button">Delete</button>
-                  <button className="confirm-button">Confirm</button>
+                  <button className="delete-button" onClick={handleClickDelete}>
+                    Delete
+                  </button>
+                  <button className="confirm-button" onClick={handleClickConfirm}>
+                    Confirm
+                  </button>
                 </div>
               </div>
             </div>

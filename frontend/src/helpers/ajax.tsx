@@ -17,4 +17,14 @@ const fetchLocation = async (id: string) => {
   return data;
 };
 
-export { fetchLocations, fetchLocationsByName, fetchLocation };
+const updateLocationPrice = async (id: string, price: string) => {
+  const { data } = await axios.patch(`http://${url}/locations/${id}`, { price: parseInt(price) });
+  return data;
+};
+
+const deleteLocation = async (id: string) => {
+  const { data } = await axios.delete(`http://${url}/locations/${id}`);
+  return data;
+};
+
+export { fetchLocations, fetchLocationsByName, fetchLocation, updateLocationPrice, deleteLocation };

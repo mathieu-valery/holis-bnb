@@ -3,6 +3,7 @@
     border-radius: 6%;
     padding: 6px;
     margin: 6px;
+    cursor: pointer;
 }
 
 .card > img {
