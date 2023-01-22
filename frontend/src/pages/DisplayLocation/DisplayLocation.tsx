@@ -21,9 +21,11 @@ const DisplayLocationPage: React.FC<DisplayLocationPageProps> = () => {
   const [location, setLocation] = useState<Location | null>(null);
 
   useEffect(() => {
-    fetchLocation(id).then((res) => {
-      setLocation(res);
-    });
+    fetchLocation(id)
+      .then((res) => {
+        setLocation(res);
+      })
+      .catch((error) => console.error(error.message));
   }, []);
 
   const handleClickConfirm = () => {
@@ -32,7 +34,7 @@ const DisplayLocationPage: React.FC<DisplayLocationPageProps> = () => {
         .then((res) => {
           setLocation(res);
         })
-        .catch((err) => window.alert(`ERROR: ${err.message}`));
+        .catch((error) => window.alert(`ERROR: ${error.message}`));
     }
   };
 
@@ -42,7 +44,7 @@ const DisplayLocationPage: React.FC<DisplayLocationPageProps> = () => {
         .then(() => {
           navigate('/');
         })
-        .catch((err) => window.alert(`ERROR: ${err.message}`));
+        .catch((error) => window.alert(`ERROR: ${error.message}`));
     }
   };
 

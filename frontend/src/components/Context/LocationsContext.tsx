@@ -10,15 +10,19 @@ let LocationsProvider = (props: any) => {
   const [locations, setLocations] = useState<Array<Location> | null>(null);
 
   const getLocations = () => {
-    fetchLocations().then((res) => {
-      setLocations(res);
-    });
+    fetchLocations()
+      .then((response) => {
+        setLocations(response);
+      })
+      .catch((error) => console.error(error.message));
   };
 
   const getLocationsByName = (title: string) => {
-    fetchLocationsByName(title).then((res) => {
-      setLocations(res);
-    });
+    fetchLocationsByName(title)
+      .then((response) => {
+        setLocations(response);
+      })
+      .catch((error) => console.error(error.message));
   };
 
   const store = {
