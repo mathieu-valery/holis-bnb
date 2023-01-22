@@ -18,13 +18,15 @@
 }
 
 .card-title {
-    color: rgba(0, 0, 0, 0.55);
+    color: var(--color-grey);
 }
 
 .card-location {
     line-height: 10px;
+    color: var(--color-grey);
 }
 
 .card-price {
     line-height: 10px;
+    color: var(--color-grey);
 }

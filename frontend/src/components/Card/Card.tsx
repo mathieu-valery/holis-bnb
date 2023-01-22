@@ -20,7 +20,9 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
         <strong>{props.location.title}</strong>
       </p>
       <p className="card-location">{props.location.location}</p>
-      <p className="card-price">{`€ ${props.location.price} night`}</p>
+      <p className="card-price">
+        <strong>{`€${props.location.price}`}</strong> night
+      </p>
     </div>
   );
 };

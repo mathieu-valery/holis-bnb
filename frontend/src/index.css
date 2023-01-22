@@ -12,3 +12,9 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+:root {
+  --color-grey: rgba(0, 0, 0, 0.55);
+  --color-green: #04ddbf;
+  --color-box-shadow: rgba(0, 0, 0, 0.15);
+}

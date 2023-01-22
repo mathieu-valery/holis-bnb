@@ -12,22 +12,22 @@
 
 .display-location__content .title {
     font-size: 35px;
-    color: rgba(0, 0, 0, 0.55);
+    color: var(--color-grey);
 }
 
 .display-location__content .category-name {
     font-size: 18px;
-    color: rgba(0, 0, 0, 0.55);
+    color: var(--color-grey);
 }
 
 .display-location__content .category-description {
     font-size: 18px;
-    color: rgba(0, 0, 0, 0.55);
+    color: var(--color-grey);
 }
 
 .price {
     font-size: 18px;
-    color: rgba(0, 0, 0, 0.55);
+    color: var(--color-grey);
 }
 
 .price-strong {
@@ -40,7 +40,7 @@
     flex-direction: column;
     border: 1px solid lightgray;
     border-radius: 10px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 1px 1px 5px var(--color-box-shadow);
     padding: 16px;
     margin-top: 20px;
 }
@@ -49,7 +49,7 @@
     align-self: flex-start;
     padding-left: 12px;
     font-size: 14px;
-    color:rgba(0, 0, 0, 0.55);
+    color: var(--color-grey);
 }
 
 
@@ -63,7 +63,7 @@
     height: 30px;
     border: 1px solid lightgray;
     border-radius: 999px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 1px 1px 5px var(--color-box-shadow);
 }
 
 .buttons-container {
@@ -80,11 +80,11 @@
     outline-width: 0;
     font-size: 14px;
     height: 36px;
-    border: 1px solid #04ddbf;
+    border: 1px solid var(--color-green);
     background-color: white;
-    color: #04ddbf;
+    color: var(--color-green);
     border-radius: 999px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 1px 1px 5px var(--color-box-shadow);
     text-align: center;
     line-height: 0px;
     cursor: pointer;
@@ -97,11 +97,11 @@
     outline-width: 0;
     font-size: 14px;
     height: 36px;
-    border: 1px solid #04ddbf;
-    background-color: #04ddbf;
+    border: 1px solid var(--color-green);
+    background-color: var(--color-green);
     color: white;
     border-radius: 999px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 1px 1px 5px var(--color-box-shadow);
     text-align: center;
     line-height: 0px;
     cursor: pointer;
