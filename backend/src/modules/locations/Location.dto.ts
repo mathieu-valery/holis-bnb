@@ -26,6 +26,7 @@ export class CreateLocationDto {
 }
 export class GetLocationsDto {
   @IsOptional()
+  @IsString()
   title: string;
 }
 
