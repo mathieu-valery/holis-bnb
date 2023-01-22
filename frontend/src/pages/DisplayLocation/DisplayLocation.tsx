@@ -50,7 +50,12 @@ const DisplayLocationPage: React.FC<DisplayLocationPageProps> = () => {
           <div className="container">
             <div className="display-location__content">
               <p className="title">{location.title}</p>
-              <p className="category-name">{location.category.name}</p>
+              <div className="category-container">
+                <p className="category-name">{location.category.name}</p>
+                <li className="number-of-rooms">
+                  {`${location.numberOfRooms} room${location.numberOfRooms > 1 ? 's' : ''}`}
+                </li>
+              </div>
               <p className="category-description">{location.description}</p>
             </div>
             <p className="price">

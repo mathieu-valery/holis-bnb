@@ -20,6 +20,16 @@
     color: var(--color-grey);
 }
 
+.category-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.number-of-rooms {
+    color: var(--color-grey)
+}
+
 .display-location__content .category-name {
     font-size: 18px;
     color: var(--color-grey);
@@ -42,9 +52,12 @@
     color: rgba(0, 0, 0, 0.9);
 }
 
+.display-location__edit {
+    flex: 1;
+}
+
 .display-location__edit .container {
     display: flex;
-    flex: 1;
     flex-direction: column;
     border: 1px solid lightgray;
     border-radius: 10px;
