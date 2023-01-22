@@ -21,8 +21,8 @@ export class CreateLocationDto {
   @IsNumber()
   price: number;
 
-  @IsNumber()
-  categoryId: number;
+  @IsString()
+  categoryName: string;
 }
 export class GetLocationsDto {
   @IsOptional()

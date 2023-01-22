@@ -1,3 +1,4 @@
+import { Category } from './../categories/Category.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, ILike } from 'typeorm';
@@ -8,11 +9,33 @@ export class LocationService {
   constructor(
     @InjectRepository(Location)
     private readonly locationRepository: Repository<Location>,
+    @InjectRepository(Category)
+    private readonly categoryRepository: Repository<Category>,
   ) {}
 
   async createLocation(body) {
-    const newLocation = await this.locationRepository.create(body);
-    return this.locationRepository.save(newLocation);
+    const findedCategory = await this.categoryRepository.findOne({
+      name: body.categoryName,
+    });
+    const { categoryName, ...locationPayload } = body;
+    if (findedCategory) {
+      const newLocation = await this.locationRepository.create({
+        ...locationPayload,
+        categoryId: findedCategory.id,
+      });
+      return this.locationRepository.save(newLocation);
+    } else {
+      const newCategory = await this.categoryRepository.create({
+        name: body.categoryName,
+        description: 'New Description',
+      });
+      const createdCategory = await this.categoryRepository.save(newCategory);
+      const newLocation = await this.locationRepository.create({
+        ...locationPayload,
+        categoryId: createdCategory.id,
+      });
+      return this.locationRepository.save(newLocation);
+    }
   }
 
   async getLocations() {
