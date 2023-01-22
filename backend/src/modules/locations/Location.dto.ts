@@ -1,5 +1,5 @@
 // import { Type } from 'class-transformer';
-// import { IsDate, IsNumber, IsString } from 'class-validator';
+import { IsDate, IsNumber, IsString } from 'class-validator';
 import { IsOptional } from 'class-validator';
 
 /**
@@ -24,7 +24,12 @@ import { IsOptional } from 'class-validator';
 //   zzzz: number;
 // }
 
-export class GetFilterLocationDto {
+export class GetLocationsDto {
   @IsOptional()
   title: string;
+}
+
+export class UpdateLocationPriceDto {
+  @IsNumber()
+  price: number;
 }

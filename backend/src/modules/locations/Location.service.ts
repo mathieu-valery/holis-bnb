@@ -23,4 +23,12 @@ export class LocationService {
   async getLocation(id: string) {
     return await this.locationRepository.findOne(id);
   }
+
+  async updateLocationPrice(id: string, body) {
+    const location = await this.locationRepository.findOne(id);
+    return this.locationRepository.save({
+      ...location,
+      ...body,
+    });
+  }
 }
