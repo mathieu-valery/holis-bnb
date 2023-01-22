@@ -12,9 +12,7 @@ export class LocationService {
 
   async createLocation(body) {
     const newLocation = await this.locationRepository.create(body);
-    return this.locationRepository.save({
-      ...newLocation,
-    });
+    return this.locationRepository.save(newLocation);
   }
 
   async getLocations() {
@@ -37,5 +35,10 @@ export class LocationService {
       ...location,
       ...body,
     });
+  }
+
+  async deleteLocation(id: string) {
+    const location = await this.locationRepository.findOne(id);
+    return this.locationRepository.delete(location);
   }
 }

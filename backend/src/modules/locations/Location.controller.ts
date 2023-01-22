@@ -1,7 +1,19 @@
-import { Controller, Get, Param, Query, Put, Body, Patch, Post } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Query,
+  Body,
+  Patch,
+  Post,
+  Delete,
+} from '@nestjs/common';
 import { LocationService } from './Location.service';
-import { Request } from 'express';
-import { GetLocationsDto, UpdateLocationPriceDto, CreateLocationDto } from './Location.dto';
+import {
+  GetLocationsDto,
+  UpdateLocationPriceDto,
+  CreateLocationDto,
+} from './Location.dto';
 
 @Controller('locations')
 export class LocationController {
@@ -31,5 +43,10 @@ export class LocationController {
     @Body() body: UpdateLocationPriceDto,
   ) {
     return await this.locationService.updateLocationPrice(id, body);
+  }
+
+  @Delete(':id')
+  async deleteLocation(@Param('id') id: string) {
+    return await this.locationService.deleteLocation(id);
   }
 }
