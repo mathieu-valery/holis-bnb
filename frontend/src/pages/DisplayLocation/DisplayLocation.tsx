@@ -51,7 +51,7 @@ const DisplayLocationPage: React.FC<DisplayLocationPageProps> = () => {
             <div className="display-location__content">
               <p className="title">{location.title}</p>
               <p className="category-name">{location.category.name}</p>
-              <p className="category-description">{location.category.description}</p>
+              <p className="category-description">{location.description}</p>
             </div>
             <p className="price">
               <strong>{`€${location.price}`}</strong> night
