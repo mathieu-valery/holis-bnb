@@ -45,8 +45,9 @@ const SearchPage: React.FC<SearchPageProps> = () => {
           {Object.entries<any>(LocationsByRooms).map(([key, locationArray]) => (
             <div key={key} className="rooms-section">
               <h2 className="rooms-title">
-                {`${locationArray[0]['numberOfRooms']} room
-                ${locationArray[0]['numberOfRooms'] > 1 ? 's' : ''}`}
+                {`${locationArray[0]['numberOfRooms']} room${
+                  locationArray[0]['numberOfRooms'] > 1 ? 's' : ''
+                }`}
               </h2>
               <div className="cards-section">
                 {locationArray.map((location: Location) => (
