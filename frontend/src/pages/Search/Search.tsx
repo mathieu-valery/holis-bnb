@@ -7,7 +7,7 @@ import LocationsContext from '../../components/Context/LocationsContext';
 type SearchPageProps = {};
 
 const SearchPage: React.FC<SearchPageProps> = () => {
-  let locationsByCategory: any = {};
+  let locationsByCategoriesAndNbrOfRooms: any = {};
   const locationsContext: any = useContext(LocationsContext);
   const locations = locationsContext.locations;
 
@@ -23,10 +23,12 @@ const SearchPage: React.FC<SearchPageProps> = () => {
   };
 
   const filterByCategoriesAndNumberOfRooms = () => {
-    locationsByCategory = groupBy(locations, 'categoryId');
-    Object.entries<any>(locationsByCategory).forEach(([key, value]: [string, Array<Location>]) => {
-      locationsByCategory[key] = groupBy(value, 'numberOfRooms');
-    });
+    locationsByCategoriesAndNbrOfRooms = groupBy(locations, 'categoryId');
+    Object.entries<any>(locationsByCategoriesAndNbrOfRooms).forEach(
+      ([key, value]: [string, Array<Location>]) => {
+        locationsByCategoriesAndNbrOfRooms[key] = groupBy(value, 'numberOfRooms');
+      }
+    );
   };
 
   if (locations) {
@@ -35,7 +37,7 @@ const SearchPage: React.FC<SearchPageProps> = () => {
 
   return (
     <div className="search">
-      {Object.entries<any>(locationsByCategory).map(([key, LocationsByRooms]) => (
+      {Object.entries<any>(locationsByCategoriesAndNbrOfRooms).map(([key, LocationsByRooms]) => (
         <React.Fragment key={key}>
           <h1 key={key} className="category-title">
             {LocationsByRooms[Object.keys(LocationsByRooms)[0]][0].category.name}
