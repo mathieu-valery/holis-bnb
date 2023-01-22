@@ -1,4 +1,4 @@
-import { IsNumber, IsString, IsOptional } from 'class-validator';
+import { IsNumber, IsString, IsOptional, IsPositive } from 'class-validator';
 export class CreateLocationDto {
   @IsString()
   title: string;
@@ -32,5 +32,6 @@ export class GetLocationsDto {
 
 export class UpdateLocationPriceDto {
   @IsNumber()
+  @IsPositive()
   price: number;
 }
