@@ -1,29 +1,29 @@
-// import { Type } from 'class-transformer';
-import { IsDate, IsNumber, IsString } from 'class-validator';
-import { IsOptional } from 'class-validator';
+import { IsNumber, IsString, IsOptional } from 'class-validator';
+export class CreateLocationDto {
+  @IsString()
+  title: string;
 
-/**
- * This dto is used to control user inputs and make sure it is valid data to create locations.
- * If the input provided to the endpoint does not match the rules defined by decorators here,
- * the endpoint will immediately return an error.
- * More info here: https://docs.nestjs.com/techniques/validation
- */
+  @IsString()
+  description: string;
 
-/**
- * TODO implement
- */
-// export class ExampleLocationDto {
-//   @IsString()
-//   xxx: string;
+  @IsString()
+  location: string;
 
-//   @IsDate()
-//   @Type(() => Date)
-//   yyyy: Date;
+  @IsString()
+  picture: string;
 
-//   @IsNumber()
-//   zzzz: number;
-// }
+  @IsNumber()
+  stars: number;
 
+  @IsNumber()
+  numberOfRooms: number;
+
+  @IsNumber()
+  price: number;
+
+  @IsNumber()
+  categoryId: number;
+}
 export class GetLocationsDto {
   @IsOptional()
   title: string;
