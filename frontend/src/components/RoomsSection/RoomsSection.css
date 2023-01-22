@@ -4,10 +4,14 @@
 
 .rooms-section {
     display: flex;
-    
+}
+
+.rooms-title {
+    min-width: 150px;
 }
 
 .cards-section {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
