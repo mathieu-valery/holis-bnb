@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { fetchLocations, fetchLocationsByName } from '../../helpers/ajax';
+import { fetchLocations, fetchLocationsByName } from '../../helpers/axios';
 import { Location } from '../../helpers/interfaces';
 
 const LocationsContext = createContext({});

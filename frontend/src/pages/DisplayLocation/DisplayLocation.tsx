@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { fetchLocation, updateLocationPrice, deleteLocation } from '../../helpers/ajax';
+import { fetchLocation, updateLocationPrice, deleteLocation } from '../../helpers/axios';
 import { Location } from '../../helpers/interfaces';
 import './DisplayLocation.css';
 
