@@ -7,7 +7,7 @@ import LocationsContext from '../../components/Context/LocationsContext';
 type SearchPageProps = {};
 
 const SearchPage: React.FC<SearchPageProps> = () => {
-  let locationsByCategoriesAndNbrOfRooms: any = {};
+  let locationsByCategoriesAndNbrOfRooms: any = [];
   const locationsContext: any = useContext(LocationsContext);
   const locations = locationsContext.locations;
 
@@ -15,42 +15,58 @@ const SearchPage: React.FC<SearchPageProps> = () => {
     locationsContext.getLocations();
   }, []);
 
-  const groupBy = (array: Array<Location>, key: keyof Location): object => {
-    return array.reduce((result: any, currentValue: any) => {
-      (result[currentValue[key]] = result[currentValue[key]] || []).push(currentValue);
-      return result;
-    }, {});
+  let groupByCategories = (array: any) => {
+    return array.reduce((acc: any, currentLocation: Location) => {
+      const findedCategoryIndex = acc.findIndex(
+        (category: any) => category.id === currentLocation.category.id
+      );
+      if (findedCategoryIndex > 0) {
+        acc[findedCategoryIndex].locations.push(currentLocation);
+      } else {
+        acc.push({ ...currentLocation.category, locations: [currentLocation] });
+      }
+      return acc;
+    }, []);
   };
 
-  const filterByCategoriesAndNumberOfRooms = () => {
-    locationsByCategoriesAndNbrOfRooms = groupBy(locations, 'categoryId');
-    Object.entries<any>(locationsByCategoriesAndNbrOfRooms).forEach(
-      ([key, value]: [string, Array<Location>]) => {
-        locationsByCategoriesAndNbrOfRooms[key] = groupBy(value, 'numberOfRooms');
+  let groupByNbrOfRooms = (array: any) => {
+    return array.reduce((acc: any, currentLocation: any) => {
+      const findedNumberOfRoomsIndex = acc.findIndex(
+        (el: any) => el.numberOfRooms === currentLocation.numberOfRooms
+      );
+      if (findedNumberOfRoomsIndex > -1) {
+        acc[findedNumberOfRoomsIndex].locations.push(currentLocation);
+      } else {
+        acc.push({ numberOfRooms: currentLocation.numberOfRooms, locations: [currentLocation] });
       }
-    );
+      return acc;
+    }, []);
   };
 
   if (locations) {
-    filterByCategoriesAndNumberOfRooms();
+    locationsByCategoriesAndNbrOfRooms = groupByCategories(locations);
+    locationsByCategoriesAndNbrOfRooms.forEach(
+      (el: any) => (el.locations = groupByNbrOfRooms(el.locations))
+    );
+    locationsByCategoriesAndNbrOfRooms.map((category: any) =>
+      category.locations.sort((a: any, b: any) => a.numberOfRooms - b.numberOfRooms)
+    );
   }
 
   return (
     <div className="search">
-      {Object.entries<any>(locationsByCategoriesAndNbrOfRooms).map(([key, LocationsByRooms]) => (
-        <React.Fragment key={key}>
-          <h1 key={key} className="category-title">
-            {LocationsByRooms[Object.keys(LocationsByRooms)[0]][0].category.name}
+      {locationsByCategoriesAndNbrOfRooms.map((category: any) => (
+        <React.Fragment key={category.id}>
+          <h1 key={category.id} className="category-title">
+            {category.name}
           </h1>
-          {Object.entries<any>(LocationsByRooms).map(([key, locationArray]) => (
-            <div key={key} className="rooms-section">
+          {category.locations.map((obj: any, index: string) => (
+            <div key={index} className="rooms-section">
               <h2 className="rooms-title">
-                {`${locationArray[0]['numberOfRooms']} room${
-                  locationArray[0]['numberOfRooms'] > 1 ? 's' : ''
-                }`}
+                {`${obj.numberOfRooms} room${obj.numberOfRooms > 1 ? 's' : ''}`}
               </h2>
               <div className="cards-section">
-                {locationArray.map((location: Location) => (
+                {obj.locations.map((location: Location) => (
                   <Card key={location.id} location={location}></Card>
                 ))}
               </div>
