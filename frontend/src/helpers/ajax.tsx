@@ -8,7 +8,7 @@ const fetchLocations = async () => {
 };
 
 const fetchLocationsByName = async (title: string) => {
-  const { data } = await axios.get(`http://${url}/locations?title=${title}`);
+  const { data } = await axios.get(`http://${url}/locations`, { params: { title: title } });
   return data;
 };
 
