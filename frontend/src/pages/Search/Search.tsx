@@ -4,20 +4,39 @@ import { Location } from '../../helpers/interfaces';
 import Card from '../../components/Card/Card';
 import LocationsContext from '../../components/Context/LocationsContext';
 
+interface preSortedCategory {
+  id: number;
+  name: string;
+  description: string;
+  locations: Array<Location>;
+}
+
+interface sortedCategory {
+  id: number;
+  name: string;
+  description: string;
+  locations: Array<sortedLocation>;
+}
+
+interface sortedLocation {
+  numberOfRooms: number;
+  locations: Array<Location>;
+}
+
 type SearchPageProps = {};
 
 const SearchPage: React.FC<SearchPageProps> = () => {
-  const locationsContext: any = useContext(LocationsContext);
+  const locationsContext = useContext(LocationsContext);
   const locations = locationsContext.locations;
 
   useEffect(() => {
     locationsContext.getLocations();
   }, []);
 
-  const groupByCategories = (array: any) => {
-    return array.reduce((acc: any, currentLocation: Location) => {
+  const groupLocationsByCategories = (array: Array<Location>) => {
+    return array.reduce((acc: Array<preSortedCategory>, currentLocation: Location) => {
       const findedCategoryIndex = acc.findIndex(
-        (category: any) => category.id === currentLocation.category.id
+        (category) => category.id === currentLocation.category.id
       );
       if (findedCategoryIndex > -1) {
         acc[findedCategoryIndex].locations.push(currentLocation);
@@ -28,10 +47,10 @@ const SearchPage: React.FC<SearchPageProps> = () => {
     }, []);
   };
 
-  const groupByNbrOfRooms = (array: any) => {
-    return array.reduce((acc: any, currentLocation: any) => {
+  const groupLocationsByNbrOfRooms = (array: Array<Location>) => {
+    return array.reduce((acc: Array<sortedLocation>, currentLocation: Location) => {
       const findedNumberOfRoomsIndex = acc.findIndex(
-        (el: any) => el.numberOfRooms === currentLocation.numberOfRooms
+        (el) => el.numberOfRooms === currentLocation.numberOfRooms
       );
       if (findedNumberOfRoomsIndex > -1) {
         acc[findedNumberOfRoomsIndex].locations.push(currentLocation);
@@ -42,31 +61,42 @@ const SearchPage: React.FC<SearchPageProps> = () => {
     }, []);
   };
 
-  const filterByCategorieAndNumberOfRooms = (locations: any) => {
+  const groupCategoriesByRooms = (categories: any): Array<sortedCategory> => {
+    // Here 'any' is needed because I transform key of Locations[] within object 'preSortedCategories'
+    // into an array of Locations grouped by number of rooms (type 'sortedLocation[]')
+    categories.forEach((category: any) => {
+      category.locations = groupLocationsByNbrOfRooms(category.locations);
+    });
+    categories.map((category: sortedCategory) =>
+      category.locations.sort(
+        (a: sortedLocation, b: sortedLocation) => a.numberOfRooms - b.numberOfRooms
+      )
+    );
+    return categories;
+  };
+
+  const filterByCategorieAndNumberOfRooms = (locations: Array<Location> | null) => {
     if (locations) {
-      const locationsByCategories = groupByCategories(locations);
-      locationsByCategories.forEach((el: any) => (el.locations = groupByNbrOfRooms(el.locations)));
-      locationsByCategories.map((category: any) =>
-        category.locations.sort((a: any, b: any) => a.numberOfRooms - b.numberOfRooms)
-      );
-      return locationsByCategories;
+      const categoriesByLocations = groupLocationsByCategories(locations);
+      const categories = groupCategoriesByRooms(categoriesByLocations);
+      return categories;
     }
   };
 
-  const locationsByCategoriesAndNbrOfRooms: any = useMemo(
+  const categoriesByLocationsAndNumberOfRooms = useMemo(
     () => filterByCategorieAndNumberOfRooms(locations),
     [locations]
   );
 
   return (
     <div className="search">
-      {locationsByCategoriesAndNbrOfRooms &&
-        locationsByCategoriesAndNbrOfRooms.map((category: any) => (
+      {categoriesByLocationsAndNumberOfRooms &&
+        categoriesByLocationsAndNumberOfRooms.map((category) => (
           <React.Fragment key={category.id}>
             <h1 key={category.id} className="category-title">
               {category.name}
             </h1>
-            {category.locations.map((obj: any, index: string) => (
+            {category.locations.map((obj: sortedLocation, index: number) => (
               <div key={index} className="rooms-section">
                 <h2 className="rooms-title">
                   {`${obj.numberOfRooms} room${obj.numberOfRooms > 1 ? 's' : ''}`}
