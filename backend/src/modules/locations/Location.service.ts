@@ -1,3 +1,4 @@
+import { CreateLocationDto, UpdateLocationPriceDto } from './Location.dto';
 import { Category } from './../categories/Category.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -13,7 +14,7 @@ export class LocationService {
     private readonly categoryRepository: Repository<Category>,
   ) {}
 
-  async createLocation(body) {
+  async createLocation(body: CreateLocationDto) {
     const findedCategory = await this.categoryRepository.findOne({
       name: body.categoryName,
     });
@@ -52,7 +53,7 @@ export class LocationService {
     return await this.locationRepository.findOne(id);
   }
 
-  async updateLocationPrice(id: string, body) {
+  async updateLocationPrice(id: string, body: UpdateLocationPriceDto) {
     const location = await this.locationRepository.findOne(id);
     return this.locationRepository.save({
       ...location,
