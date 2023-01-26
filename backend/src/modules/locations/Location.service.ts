@@ -50,11 +50,11 @@ export class LocationService {
   }
 
   async getLocation(id: string) {
-    return await this.locationRepository.findOne(id);
+    return await this.locationRepository.findOneOrFail(id);
   }
 
   async updateLocationPrice(id: string, body: UpdateLocationPriceDto) {
-    const location = await this.locationRepository.findOne(id);
+    const location = await this.locationRepository.findOneOrFail(id);
     return this.locationRepository.save({
       ...location,
       ...body,
@@ -62,7 +62,7 @@ export class LocationService {
   }
 
   async deleteLocation(id: string) {
-    const location = await this.locationRepository.findOne(id);
+    const location = await this.locationRepository.findOneOrFail(id);
     return this.locationRepository.delete(location);
   }
 }

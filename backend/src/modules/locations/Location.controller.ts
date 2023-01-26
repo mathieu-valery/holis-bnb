@@ -7,6 +7,8 @@ import {
   Patch,
   Post,
   Delete,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { LocationService } from './Location.service';
 import {
@@ -21,7 +23,14 @@ export class LocationController {
 
   @Post()
   async createLocation(@Body() body: CreateLocationDto) {
-    return await this.locationService.createLocation(body);
+    try {
+      return await this.locationService.createLocation(body);
+    } catch (error) {
+      throw new HttpException(
+        { status: HttpStatus.BAD_REQUEST, error: 'Test' },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 
   @Get()
@@ -34,7 +43,14 @@ export class LocationController {
 
   @Get(':id')
   async getLocation(@Param('id') id: string) {
-    return await this.locationService.getLocation(id);
+    try {
+      return await this.locationService.getLocation(id);
+    } catch (error) {
+      throw new HttpException(
+        { status: HttpStatus.NOT_FOUND, error: 'Location not Found' },
+        HttpStatus.NOT_FOUND,
+      );
+    }
   }
 
   @Patch(':id')
@@ -42,11 +58,25 @@ export class LocationController {
     @Param('id') id: string,
     @Body() body: UpdateLocationPriceDto,
   ) {
-    return await this.locationService.updateLocationPrice(id, body);
+    try {
+      return await this.locationService.updateLocationPrice(id, body);
+    } catch (error) {
+      throw new HttpException(
+        { status: HttpStatus.NOT_FOUND, error: error },
+        HttpStatus.NOT_FOUND,
+      );
+    }
   }
 
   @Delete(':id')
   async deleteLocation(@Param('id') id: string) {
-    return await this.locationService.deleteLocation(id);
+    try {
+      return await this.locationService.deleteLocation(id);
+    } catch (error) {
+      throw new HttpException(
+        { status: HttpStatus.NOT_FOUND, error: error },
+        HttpStatus.NOT_FOUND,
+      );
+    }
   }
 }
