@@ -27,8 +27,8 @@ export class LocationController {
       return await this.locationService.createLocation(body);
     } catch (error) {
       throw new HttpException(
-        { status: HttpStatus.BAD_REQUEST, error: 'Test' },
-        HttpStatus.BAD_REQUEST,
+        { status: HttpStatus.BAD_GATEWAY, error: error },
+        HttpStatus.BAD_GATEWAY,
       );
     }
   }
