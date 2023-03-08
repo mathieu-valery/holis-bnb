@@ -61,18 +61,18 @@ const SearchPage: React.FC<SearchPageProps> = () => {
     }, []);
   };
 
-  const groupCategoriesByRooms = (categories: any): Array<sortedCategory> => {
-    // Here 'any' is needed because I transform key of Locations[] within object 'preSortedCategories'
-    // into an array of Locations grouped by number of rooms (type 'sortedLocation[]')
-    categories.forEach((category: any) => {
-      category.locations = groupLocationsByNbrOfRooms(category.locations);
+  const groupCategoriesByRooms = (categories: Array<preSortedCategory>): Array<sortedCategory> => {
+    const groupedCategories = categories.map((category) => {
+      return { ...category, locations: groupLocationsByNbrOfRooms(category.locations) };
     });
-    categories.map((category: sortedCategory) =>
+
+    groupedCategories.map((category) =>
       category.locations.sort(
         (a: sortedLocation, b: sortedLocation) => a.numberOfRooms - b.numberOfRooms
       )
     );
-    return categories;
+
+    return groupedCategories;
   };
 
   const filterByCategorieAndNumberOfRooms = (locations: Array<Location> | null) => {
